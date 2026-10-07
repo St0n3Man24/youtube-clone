@@ -9,8 +9,8 @@ const App = () => {
 
   return (
     <div>
-      <Navbar setSidebar={setSidebar} />
       <Router>
+        <Navbar setSidebar={setSidebar} />
         <Routes>
           <Route path="/" element={<Home sidebar={sidebar} />} />
           <Route path="/video/:categoryId/:videoId" element={<Video />} />
