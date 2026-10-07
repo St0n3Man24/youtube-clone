@@ -14,6 +14,7 @@ const PlayVideo = ({videoId}) => {
 
   const [apiData, setApiData] = useState(null);
   const [channelData, setChannelData] = useState(null);
+  const [commentData, setCommentData] = useState([]);
 
   const fetchVideoData = async () => {
     // Fetching Videos Data
@@ -25,6 +26,10 @@ const PlayVideo = ({videoId}) => {
     // Fetching Channel Data
     const channelData_url = `https://youtube.googleapis.com/youtube/v3/channels?part=snippet%2CcontentDetails%2Cstatistics&id=${apiData.snippet.channelId}&key=${API_KEY}`
     await fetch(channelData_url).then(response => response.json()).then(data => setChannelData(data.items[0]));
+
+    // Fetching Comment Data
+    const comment_url = `https://youtube.googleapis.com/youtube/v3/commentThreads?part=snippet%2Creplies&maxResults=50&videoId=${videoId}&key=${API_KEY}`;
+    await fetch(comment_url).then(response => response.json()).then(data => setCommentData(data.items));
   }
 
   useEffect(() => {
@@ -32,6 +37,7 @@ const PlayVideo = ({videoId}) => {
   }, [])
 
   useEffect(() => {
+    if (!apiData?.snippet?.channelId) return;
     fetchChannelData();
   }, [apiData])
 
@@ -68,7 +74,7 @@ const PlayVideo = ({videoId}) => {
         <img src={channelData ? channelData.snippet.thumbnails.default.url : ""} alt="" />
         <div>
           <p>{apiData ? apiData.snippet.channelTitle : ""}</p>
-          <span>1M Subscribers</span>
+          <span>{channelData ? value_converter(channelData.statistics.subscriberCount) : ""} Subscribers</span>
         </div>
         <button>Subscribe</button>
       </div>
@@ -76,78 +82,23 @@ const PlayVideo = ({videoId}) => {
         <p>{apiData ? apiData.snippet.description.slice(0, 250) : ""}</p>
         <hr />
         <h4>{apiData ? value_converter(apiData.statistics.commentCount) : ""} Comments</h4>
-        <div className="comment">
-          <img src={user_profile} alt="" />
-          <div>
-            <h3>
-              Jack Nicholson <span>1 day ago</span>
-            </h3>
-            <p>
-              This video helped me to better understand the concepts behind web
-              development.
-            </p>
-            <div className="comment-action">
-              <img src={like} alt="" />
-              <span>244</span>
-              <img src={dislike} alt="" />
-              <span>3</span>
+        {commentData.map((item, index) => {
+          return (
+            <div key={index} className="comment">
+              <img src={item.snippet.topLevelComment.snippet.authorProfileImageUrl} alt="" />
+              <div>
+                <h3>{item.snippet.topLevelComment.snippet.authorDisplayName}<span>1 day ago</span></h3>
+                <p>{item.snippet.topLevelComment.snippet.textDisplay}</p>
+                <div className="comment-action">
+                  <img src={like} alt="" />
+                  <span>{value_converter(item.snippet.topLevelComment.snippet.likeCount)}</span>
+                  <img src={dislike} alt="" />
+                  <span>3</span>
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
-        <div className="comment">
-          <img src={user_profile} alt="" />
-          <div>
-            <h3>
-              Jack Nicholson <span>1 day ago</span>
-            </h3>
-            <p>
-              This video helped me to better understand the concepts behind web
-              development.
-            </p>
-            <div className="comment-action">
-              <img src={like} alt="" />
-              <span>244</span>
-              <img src={dislike} alt="" />
-              <span>3</span>
-            </div>
-          </div>
-        </div>
-        <div className="comment">
-          <img src={user_profile} alt="" />
-          <div>
-            <h3>
-              Jack Nicholson <span>1 day ago</span>
-            </h3>
-            <p>
-              This video helped me to better understand the concepts behind web
-              development.
-            </p>
-            <div className="comment-action">
-              <img src={like} alt="" />
-              <span>244</span>
-              <img src={dislike} alt="" />
-              <span>3</span>
-            </div>
-          </div>
-        </div>
-        <div className="comment">
-          <img src={user_profile} alt="" />
-          <div>
-            <h3>
-              Jack Nicholson <span>1 day ago</span>
-            </h3>
-            <p>
-              This video helped me to better understand the concepts behind web
-              development.
-            </p>
-            <div className="comment-action">
-              <img src={like} alt="" />
-              <span>244</span>
-              <img src={dislike} alt="" />
-              <span>3</span>
-            </div>
-          </div>
-        </div>
+          )
+        })}
       </div>
     </div>
   );
