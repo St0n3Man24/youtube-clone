@@ -26,9 +26,10 @@ const PlayVideo = () => {
     };
 
     fetchVideoData();
-  }, [videoId])
+  }, [videoId]);
 
   useEffect(() => {
+    if (!apiData?.snippet?.channelId) return;
 
     const fetchChannelData = async () => {
       // Fetching Channel Data
@@ -40,9 +41,8 @@ const PlayVideo = () => {
       await fetch(comment_url).then(response => response.json()).then(data => setCommentData(data.items));
     };
 
-    if (!apiData?.snippet?.channelId) return;
     fetchChannelData();
-  }, [apiData])
+  }, [apiData, videoId]);
 
   return (
     <div className="play-video">

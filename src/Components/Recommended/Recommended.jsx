@@ -16,7 +16,7 @@ const Recommended = ({categoryId}) => {
     };
 
     fetchData();
-  }, [])
+  }, [categoryId])
 
   return (
     <div className="recommended">
