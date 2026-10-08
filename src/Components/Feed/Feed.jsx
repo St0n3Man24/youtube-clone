@@ -8,8 +8,8 @@ const Feed = ({category, searchQuery}) => {
 
   const [data, setData] = useState([]);
 
-  const fetchData = async () => {
-    console.log(searchQuery);
+  useEffect(() => {
+      const fetchData = async () => {
     let videoList_url = `https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&chart=mostPopular&maxResults=50&regionCode=US&videoCategoryId=${category}&key=${API_KEY}`;
 
     if (searchQuery) {
@@ -20,9 +20,8 @@ const Feed = ({category, searchQuery}) => {
     }
 
     await fetch(videoList_url).then(response => response.json()).then(data => setData(data.items))
-  }
+    };
 
-  useEffect(() => {
     const timer = setTimeout(() => {
       fetchData();
     }, 800);

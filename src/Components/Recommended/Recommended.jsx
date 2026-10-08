@@ -8,12 +8,13 @@ const Recommended = ({categoryId}) => {
 
   const [apiData, setApiData] = useState([]);
 
-  const fetchData = async () => {
-    const relatedVideo_url = `https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&chart=mostPopular&maxResults=20&regionCode=US&${categoryId}&key=${API_KEY}`;
-    await fetch(relatedVideo_url).then(response => response.json()).then(data => setApiData(data.items));
-  }
-
   useEffect(() => {
+
+    const fetchData = async () => {
+      const relatedVideo_url = `https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&chart=mostPopular&maxResults=20&regionCode=US&${categoryId}&key=${API_KEY}`;
+      await fetch(relatedVideo_url).then(response => response.json()).then(data => setApiData(data.items));
+    };
+
     fetchData();
   }, [])
 
