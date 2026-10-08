@@ -91,7 +91,13 @@ const PlayVideo = () => {
         {commentData.map((item, index) => {
           return (
             <div key={index} className="comment">
-              <img src={item.snippet.topLevelComment.snippet.authorProfileImageUrl} alt="" />
+                {item.snippet.topLevelComment.snippet.authorProfileImageUrl ? (
+                  <img src={item.snippet.topLevelComment.snippet.authorProfileImageUrl} alt="" />
+                ) : ( 
+                  <div className="comment-profile-placeholder">
+                    {item.snippet.topLevelComment.snippet.authorDisplayName.charAt(0).toUpperCase()}
+                  </div>
+                )}
               <div>
                 <h3>{item.snippet.topLevelComment.snippet.authorDisplayName}<span>1 day ago</span></h3>
                 <p>{item.snippet.topLevelComment.snippet.textDisplay}</p>
