@@ -84,7 +84,7 @@ const PlayVideo = () => {
       </div>
       <div className="vid-description">
         <p onClick={() => setShowFullDescription(!showFullDescription)} style={{ cursor: 'pointer' }}>
-          {apiData ? showFullDescription ? apiData.snippet.description : `${apiData.snippet.description.slice(0, 250)}` : ""}
+          {apiData ? showFullDescription ? apiData.snippet.description : `${apiData.snippet.description.slice(0, 100)} ...` : ""}
         </p>
         <hr />
         <h4>{apiData ? value_converter(apiData.statistics.commentCount) : ""} Comments</h4>
