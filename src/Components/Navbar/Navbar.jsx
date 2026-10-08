@@ -8,19 +8,9 @@ import more_icon from "../../assets/more.png";
 import notification_icon from "../../assets/notification.png";
 import profile_icon from "../../assets/jack.png";
 import { Link } from "react-router-dom";
-import { API_KEY } from "../../data";
 
-const Navbar = ({ setSidebar, category }) => {
+const Navbar = ({ setSidebar, setSearchQuery }) => {
   const [search, setSearch] = useState("");
-  const [videos, setVideos] = useState([]);
-
-  async function searchVideos() {
-    const response = await fetch(
-      `https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&chart=mostPopular&regionCode=US&key=[YOUR_API_KEY] HTTP/1.1?query=${search}`,
-    );
-    const data = await response.json();
-    setVideos(data.items);
-  }
 
   return (
     <nav className="flex-div">
@@ -42,8 +32,9 @@ const Navbar = ({ setSidebar, category }) => {
             type="text"
             placeholder="Search"
             onChange={(event) => setSearch(event.target.value)}
+            onKeyDown={(event) => event.key === "Enter" && setSearchQuery(search)}
           />
-            <img src={search_icon} onClick={searchVideos} alt="" />
+            <img src={search_icon} onClick={() => setSearchQuery(search)} alt="" />
         </div>
       </div>
 
