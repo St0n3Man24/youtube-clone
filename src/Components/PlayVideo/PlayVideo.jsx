@@ -18,6 +18,7 @@ const PlayVideo = () => {
   const [apiData, setApiData] = useState(null);
   const [channelData, setChannelData] = useState(null);
   const [commentData, setCommentData] = useState([]);
+  const [showFullDescription, setShowFullDescription] = useState(false);
 
   const fetchVideoData = async () => {
     // Fetching Videos Data
@@ -82,7 +83,9 @@ const PlayVideo = () => {
         <button>Subscribe</button>
       </div>
       <div className="vid-description">
-        <p>{apiData ? apiData.snippet.description.slice(0, 250) : ""}</p>
+        <p onClick={() => setShowFullDescription(!showFullDescription)} style={{ cursor: 'pointer' }}>
+          {apiData ? showFullDescription ? apiData.snippet.description : `${apiData.snippet.description.slice(0, 250)}` : ""}
+        </p>
         <hr />
         <h4>{apiData ? value_converter(apiData.statistics.commentCount) : ""} Comments</h4>
         {commentData.map((item, index) => {
