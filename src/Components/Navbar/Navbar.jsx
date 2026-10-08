@@ -21,9 +21,12 @@ const Navbar = ({ setSidebar, setSearchQuery }) => {
           src={menu_icon}
           alt=""
         />
-        <Link to="/">
-          <img className="logo" src={logo} alt="" />
-        </Link>
+        <a href="/">
+          <img
+            className="logo"
+            src={logo}
+            alt="" />
+        </a>
       </div>
 
       <div className="nav-middle flex-div">
