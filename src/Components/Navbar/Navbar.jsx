@@ -43,9 +43,7 @@ const Navbar = ({ setSidebar, category }) => {
             placeholder="Search"
             onChange={(event) => setSearch(event.target.value)}
           />
-          <button onClick={searchVideos}>
-            <img src={search_icon} alt="" />
-          </button>
+            <img src={search_icon} onClick={searchVideos} alt="" />
         </div>
       </div>
 
