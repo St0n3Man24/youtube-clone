@@ -41,7 +41,8 @@ nav {
 }
 
 .nav-right .user-icon {
-  width: 35px;
+  width: 30px;
+  height: 36px;
   border-radius: 50%;
 }
 
@@ -54,7 +55,6 @@ nav {
   }
   .nav-right .user-icon {
     display: block;
-    width: 30px;
   }
   .logo {
     width: 90px;

@@ -4,7 +4,7 @@
   height: 100vh;
   position: fixed;
   top: 0;
-  padding-left: 2%;
+  padding-left: 20px;
   padding-top: 80px;
 }
 
@@ -48,7 +48,7 @@
 
 .small-sidebar {
   width: 5%;
-  min-width: 50px;
+  min-width: 70px;
 }
 
 .small-sidebar p {
