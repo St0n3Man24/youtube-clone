@@ -18,7 +18,6 @@
   align-items: center;
   margin-bottom: 20px;
   width: fit-content;
-  flex-wrap: wrap;
   cursor: pointer;
 }
 
@@ -27,6 +26,12 @@
   height: 2px;
   background-color: #ccc;
   width: 85%;
+}
+
+.subscribed-list {
+  display: flex;
+  flex-direction: column;
+  align-items: left;
 }
 
 .subscribed-list h3 {
@@ -43,6 +48,7 @@
 
 .small-sidebar {
   width: 5%;
+  min-width: 50px;
 }
 
 .small-sidebar p {

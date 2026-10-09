@@ -11,12 +11,10 @@ const App = () => {
   useEffect(() => {
     const onResize = () => {
       setSidebar(window.innerWidth > 900);
+    };
       window.addEventListener('resize', onResize);
-      return () => {
-        window.removeEventListener('resize', onResize)
-      }
-    }
-  }, [])
+      return () => window.removeEventListener('resize', onResize)
+  }, []);
 
   return (
     <div>

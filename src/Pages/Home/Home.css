@@ -7,5 +7,5 @@
 }
 
 .large-container {
-  padding-left: 7%;
+  padding-left: max(7%, 90px);
 }
