@@ -64,8 +64,14 @@
   border-radius: 2px;
 }
 
-@media (max-width: 900px) {
-  .sidebar {
-    display: none;
+@media (max-width: 1120px) {
+  .side-links p {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 1000px) {
+  .side-links p {
+    font-size: 12px;
   }
 }
